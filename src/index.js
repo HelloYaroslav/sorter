@@ -13,6 +13,7 @@ class Sorter {
 
     at(index) {
         // your implementation
+        return this.arr[index];
     }
 
     get length() {
@@ -27,22 +28,19 @@ class Sorter {
     }
 
     sort(indices) {
-        console.log("UNsorted array", this.toArray());
-        console.log("takes indices from test -", indices);
         indices.sort(this.setComparator());
         var NeedtoSortArr = [];
-        console.log("sorted", indices);
+
 
         for (var i = 0; i < indices.length; i++) {
             NeedtoSortArr[i] = this.arr[indices[i]];
-
         }
-        console.log("nedd to sort elem -", NeedtoSortArr)
+
         NeedtoSortArr.sort(this.setComparator());
-        console.log("sorted needed elements", NeedtoSortArr);
+
         for (i = 0; i < indices.length; i++)
             this.arr[indices[i]] = NeedtoSortArr[i];
-        console.log("sorted array", this.toArray());
+
 
         // your implementation
 
@@ -50,17 +48,22 @@ class Sorter {
 
     setComparator(compareFunction) {
 
+        if (typeof(this.arr[0]) == "object")
             return function isort(a, b) {
-                if (a > b) return 1;
-                if (a < b) return -1;
+                if (a.age > b.age) return 1;
+                if (a.age < b.age) return -1;
 
             }
+        else
+            return function isort(a, b) {
+                    if (a > b) return 1;
+                    if (a < b) return -1;
 
-        }
-        // your implementation
+                }
+                // your implementation
+    }
+
 }
-
-
 
 
 module.exports = Sorter;
